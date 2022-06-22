@@ -1,1 +1,1 @@
-# flux-kube-stack
+# flux-k8s-stack
