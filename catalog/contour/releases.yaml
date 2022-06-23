@@ -19,7 +19,7 @@ spec:
           - kind: Job
             apiVersion: batch/v1
             metadata:
-              name: contour-contour-certgent
+              name: contour-contour-certgen
               namespace: ingress
             spec:
               template:
