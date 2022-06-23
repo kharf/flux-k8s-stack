@@ -16,14 +16,22 @@ spec:
   postRenderers:
     - kustomize:
         patchesStrategicMerge:
-          - kind: Job
-            apiVersion: batch/v1
+          - kind: Deployment
+            apiVersion: apps/v1
             metadata:
-              name: contour-certgen
               namespace: ingress
             spec:
               template:
                 metadata:
                   annotations:
-                    linkerd.io/inject: false
+                    linkerd.io/inject: ingress
+          - kind: DaemonSet
+            apiVersion: apps/v1
+            metadata:
+              namespace: ingress
+            spec:
+              template:
+                metadata:
+                  annotations:
+                    linkerd.io/inject: ingress
 ---
