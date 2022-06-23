@@ -15,23 +15,31 @@ spec:
       interval: 1m
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+        patches:
+          - patch: |-
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: not-used
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      linkerd.io/inject: enabled
+            target:
+              kind: Deployment
               namespace: ingress
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    linkerd.io/inject: ingress
-          - kind: DaemonSet
-            apiVersion: apps/v1
-            metadata:
+          - patch: |-
+              apiVersion: apps/v1
+              kind: DaemonSet
+              metadata:
+                name: not-used
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      linkerd.io/inject: enabled
+            target:
+              kind: DaemonSet
               namespace: ingress
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    linkerd.io/inject: ingress
 ---
