@@ -13,4 +13,17 @@ spec:
         kind: HelmRepository
         name: contour
       interval: 1m
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Job
+            apiVersion: batch/v1
+            metadata:
+              name: contour-contour-certgent
+              namespace: ingress
+            spec:
+              template:
+                metadata:
+                  annotations:
+                    linkerd.io/inject: false
 ---
