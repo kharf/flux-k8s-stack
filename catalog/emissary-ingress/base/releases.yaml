@@ -20,6 +20,7 @@ spec:
             apiVersion: apps/v1
             metadata:
               name: emissary-ingress
+              namespace: emissary-ingress
             spec:
               template:
                 metadata:
@@ -29,6 +30,7 @@ spec:
             apiVersion: apps/v1
             metadata:
               name: emissary-ingress-agent
+              namespace: emissary-ingress
             spec:
               template:
                 metadata:
