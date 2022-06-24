@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: emissary-ingress
 resources:
   - ../base
+  - backend-configs.yaml
 patchesStrategicMerge:
   - releases.yaml
