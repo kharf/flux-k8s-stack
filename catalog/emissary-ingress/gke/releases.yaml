@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: emissary-ingress
+spec:
+  values:
+    service:
+      annotations:
+        cloud.google.com/backend-config: '{"default": "emissary-hc-config"}'
+      type: NodePort
+      ports:
+        - name: http
+          port: 8080
+          targetPort: 8080
+---
