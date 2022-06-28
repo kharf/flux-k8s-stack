@@ -1,0 +1,24 @@
+---
+skip-check:
+  - CKV_K8S_21 # https://docs.bridgecrew.io/docs/bc_k8s_20 - Ensure default namespace is not used (emissary-ingres uses default ns)
+  - CKV_K8S_22 # https://docs.bridgecrew.io/docs/bc_k8s_21 - Use Read-Only filesystem for containers where possible
+  - CKV_K8S_37 # https://docs.bridgecrew.io/docs/bc_k8s_34 - Ensure admission of containers with capabilities assigned is limited
+  - CKV_K8S_14 # https://docs.bridgecrew.io/docs/bc_k8s_13 - Ensure image tag is set to Fixed - not Latest or Blank (we use fixed tags, false positive because of base manifests)
+  - CKV_K8S_40 # https://docs.bridgecrew.io/docs/bc_k8s_37 - Ensure containers run with a high UID to avoid host conflict
+  - CKV_K8S_23 # https://docs.bridgecrew.io/docs/bc_k8s_22 - Minimize admission of root containers
+  - CKV_K8S_31 # https://docs.bridgecrew.io/docs/bc_k8s_29 - Ensure seccomp is set to Docker/Default or Runtime/Default (alpha feature, disabled by default)
+  - CKV_K8S_38 # https://docs.bridgecrew.io/docs/bc_k8s_35 - Ensure service account tokens are mounted where necessary (required for side-car injection)
+  - CKV_K8S_35 # https://docs.bridgecrew.io/docs/bc_k8s_33 - Use secrets as files instead of environment variable (we currently rely on environment variables, we should mount secrets instead in the future)
+  - CKV_K8S_15 # https://docs.bridgecrew.io/docs/bc_k8s_14 - Ensure image pull policy is set to Always
+  - CKV_K8S_43 # https://docs.bridgecrew.io/docs/bc_k8s_39 - Ensure images are selected using a digest
+  - CKV_K8S_28 # https://docs.bridgecrew.io/docs/bc_k8s_27 - Ensure admission of containers with NET_RAW capability is minimized
+  - CKV_K8S_30 # https://docs.bridgecrew.io/docs/bc_k8s_28 - Ensure securityContext is applied to pods and containers (containers.securityContext takes precedence over PodSecurityContext)
+  - CKV_K8S_29 # https://docs.bridgecrew.io/docs/ensure-securitycontext-is-applied-to-pods-and-containers  - Ensure securityContext is applied to pods and containers (weird false positives)
+skip-path:
+  - clusters/dev/flux-system
+  - clusters/dev/.sops.yaml
+  - prerequisites/dev/ingress/kustomization.yaml
+  - prerequisites/base/ingress/emissary-crds.yaml
+  - prerequisites/base/ingress/kustomization.yaml
+  - creds
+  - scripts
