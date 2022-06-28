@@ -9,7 +9,7 @@ CHECK_STATUS=0
 
 set +e
 
-checkov --framework kustomize --config-file ./scripts/checkov.yaml -d . --compact --quiet
+checkov --framework kustomize -d . --compact --quiet
 if [ $? -ne 0 ]; then
    printf "=== FAILED ===\n\n"
    CHECK_STATUS=1
