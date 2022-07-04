@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../gke
-patchesStrategicMerge:
-  - releases.yaml
+  - ../linkerd
