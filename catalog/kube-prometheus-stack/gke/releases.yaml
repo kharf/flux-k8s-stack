@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
+  namespace: monitoring
 spec:
   values:
     # Kubernetes switched from kube-dns to core-dns in 1.13, but GKE Kubernetes still defaults to kube-dns.
