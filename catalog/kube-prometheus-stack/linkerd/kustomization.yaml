@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../base
+  - dashboards
 patchesStrategicMerge:
   - releases.yaml
