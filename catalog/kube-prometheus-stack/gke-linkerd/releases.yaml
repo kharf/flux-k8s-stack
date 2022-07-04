@@ -4,12 +4,6 @@ metadata:
   name: kube-prometheus-stack
 spec:
   values:
-    # Kubernetes switched from kube-dns to core-dns in 1.13, but GKE Kubernetes still defaults to kube-dns.
-    # See https://cloud.google.com/kubernetes-engine/docs/release-notes
-    coreDns:
-      enabled: false
-    kubeDns:
-      enabled: true
     prometheus:
       prometheusSpec:
         additionalScrapeConfigs:
