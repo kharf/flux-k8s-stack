@@ -20,6 +20,7 @@ spec:
   values:
     loki:
       enabled: true
+      isDefault: false
       persistence:
         enabled: true
         size: 25Gi
