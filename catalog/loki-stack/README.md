@@ -26,7 +26,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: loki
+  name: loki-stack
   namespace: flux-system
 spec:
   interval: 10m
@@ -36,7 +36,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-k8s-stack
-  path: "./catalog/loki"
+  path: "./catalog/loki-stack"
   prune: true
   wait: true
 ```
