@@ -12,6 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: loki
+      interval: 1m
   install:
     crds: Create
   upgrade:
