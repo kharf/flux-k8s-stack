@@ -47,7 +47,7 @@ spec:
                   annotations:
                     cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   install:
-    crds: Create
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
   values:

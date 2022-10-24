@@ -14,7 +14,7 @@ spec:
         name: loki
       interval: 1m
   install:
-    crds: Create
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
   values:
