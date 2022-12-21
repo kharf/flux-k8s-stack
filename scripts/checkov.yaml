@@ -1,0 +1,18 @@
+---
+framework:
+  - kustomize
+  - helm
+  - github_actions
+  - github_configuration
+skip-check:
+  - CKV_K8S_43 # https://docs.bridgecrew.io/docs/bc_k8s_39 - Ensure images are selected using a digest
+  - CKV_K8S_14 # https://docs.bridgecrew.io/docs/bc_k8s_13 - Ensure image tag is set to Fixed - not Latest or Blank (we use fixed tags, false positive because of base manifests)
+  - CKV_K8S_15 # https://docs.bridgecrew.io/docs/bc_k8s_14 - Ensure image pull policy is set to Always (most are set to IfNotPresent)
+  - CKV_K8S_9 # https://docs.bridgecrew.io/docs/bc_k8s_8 - Ensure readiness probe is configured (fast starting apps dont need that)
+  - CKV_K8S_8 # https://docs.bridgecrew.io/docs/bc_k8s_7 - Ensure liveness probe is configured
+  - CKV_K8S_40 # https://docs.bridgecrew.io/docs/bc_k8s_37 - Ensure containers run with a high UID to avoid host conflict (configured in container file)
+  - CKV_K8S_31 # https://docs.bridgecrew.io/docs/bc_k8s_29 - Ensure seccomp is set to Docker/Default or Runtime/Default (false positive on CronJob)
+  - CKV_K8S_38 # https://docs.bridgecrew.io/docs/bc_k8s_35 - Ensure service account tokens are mounted where necessary (needed for linkerd)
+  - CKV_K8S_25 # https://docs.bridgecrew.io/docs/bc_k8s_24 - Ensure admission of containers with added capability is minimized (needed for linkerd)
+  - CKV_K8S_28 # https://docs.bridgecrew.io/docs/bc_k8s_27 - Ensure admission of containers with NET_RAW capability is minimized (needed for emissary I think)
+  - CKV_K8S_37 # https://docs.bridgecrew.io/docs/bc_k8s_34 - Ensure admission of containers with capabilities assigned is limited (needed for emissary I think)
