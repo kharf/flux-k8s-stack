@@ -28,4 +28,5 @@ You're ready to browse the [catalog](#catalog).
 - [kube-prometheus-stack](./catalog/kube-prometheus-stack) - Kube-Prometheus-Stack is a collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator
 - [linkerd2](./catalog/linkerd2) - Linkerd is a service mesh for Kubernetes. It makes running services easier and safer by giving you runtime debugging, observability, reliability, and security—all without requiring any changes to your code
 - [loki-stack](./catalog/loki-stack) - Loki is a set of components that can be composed into a fully featured logging stack
+- [keda](./catalog/keda) - Keda is a Kubernetes based Event Driven Autoscaler. With KEDA, you can drive the scaling of any container in Kubernetes based on the number of events needing to be processed
 
