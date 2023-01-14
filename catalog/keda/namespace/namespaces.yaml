@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: keda
+  annotations:
+    linkerd.io/inject: enabled
