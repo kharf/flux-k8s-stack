@@ -1,5 +1,5 @@
-# Loki
-[Loki](https://grafana.com/docs/loki/) is a set of components that can be composed into a fully featured logging stack.
+# Prometheus-Stackdriver-Exporter
+[Prometheus-Stackdriver-Exporter](https://github.com/prometheus-community/stackdriver_exporter) is a proxy that requests Stackdriver API for the metric's time-series everytime prometheus scrapes it.
 
 ---
 ## Apply it to your cluster
@@ -25,7 +25,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: loki-stack
+  name: prometheus-stackdriver-exporter
   namespace: flux-system
 spec:
   interval: 10m
@@ -35,7 +35,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-k8s-stack
-  path: "./catalog/loki-stack"
+  path: "./catalog/prometheus-stackdriver-exporter"
   prune: true
   wait: true
 ```
