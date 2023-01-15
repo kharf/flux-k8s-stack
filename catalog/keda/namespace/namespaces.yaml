@@ -3,4 +3,4 @@ apiVersion: v1
 metadata:
   name: keda
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled # sidecar injection off so that the keda api service can work properly
