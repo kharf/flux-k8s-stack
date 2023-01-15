@@ -6,7 +6,7 @@
  
 #### Kustomizations
 ```yaml
-# note: loki uses the namespace of the kube-prometheus-stack, so this is optional
+# note: prometheus-stackdriver-exporter uses the namespace of the kube-prometheus-stack, so this is optional
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
