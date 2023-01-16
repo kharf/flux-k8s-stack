@@ -16,3 +16,4 @@ skip-check:
   - CKV_K8S_25 # https://docs.bridgecrew.io/docs/bc_k8s_24 - Ensure admission of containers with added capability is minimized (needed for linkerd)
   - CKV_K8S_28 # https://docs.bridgecrew.io/docs/bc_k8s_27 - Ensure admission of containers with NET_RAW capability is minimized (needed for emissary I think)
   - CKV_K8S_37 # https://docs.bridgecrew.io/docs/bc_k8s_34 - Ensure admission of containers with capabilities assigned is limited (needed for emissary I think)
+  - CKV2_K8S_6 # Minimize the admission of pods which lack an associated NetworkPolicy (should be handled by customers of this catalog)
