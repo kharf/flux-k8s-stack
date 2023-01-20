@@ -27,16 +27,6 @@ spec:
                 metadata:
                   annotations:
                     cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
-              name: emissary-ingress-agent
-              namespace: ingress
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   install:
     crds: CreateReplace
   upgrade:
