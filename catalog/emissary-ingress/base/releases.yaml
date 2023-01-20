@@ -41,4 +41,7 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+  values:
+    agent:
+      enabled: false
 ---
