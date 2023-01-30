@@ -1,8 +1,6 @@
 # kyverno
 
-This stack deploys the following components:
-
-- [kyverno](https://github.com/kyverno/kyverno) (policy management for Kubernetes)
+[Kyverno](https://github.com/kyverno/kyverno) is a Kubernetes Native Policy Management engine.
 
 ## Usage
 
