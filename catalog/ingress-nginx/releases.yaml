@@ -18,19 +18,3 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
-  values:
-    controller:
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
-          namespace: ingress-nginx
-          additionalLabels:
-            release: prometheus-operator
-      ingressClassResource:
-        enabled: true
-      podAnnotations:
-        prometheus.io/scrape: true
-        prometheus.io/port: 10254
-        # optional for linkerd-stack
-        linkerd.io/inject: enabled
