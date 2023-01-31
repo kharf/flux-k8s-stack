@@ -31,4 +31,4 @@ You're ready to browse the [catalog](#catalog).
 - [loki-stack](./catalog/loki-stack) - Loki is a set of components that can be composed into a fully featured logging stack
 - [keda](./catalog/keda) - Keda is a Kubernetes based Event Driven Autoscaler. With KEDA, you can drive the scaling of any container in Kubernetes based on the number of events needing to be processed
 - [kyverno](./catalog/kyverno) - Kyverno is a policy engine designed for Kubernetes.
-- [ingress-nginx](./catalog/ingress-nginx) - Ingress-Nginx is an Ingress controller for Kubernetes using [NGINX](https://www.nginx.org/) as a reverse proxy and load balancer.
+- [ingress-nginx](./catalog/ingress-nginx) - Ingress-Nginx is an Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer.
