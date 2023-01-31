@@ -1,0 +1,78 @@
+---
+################################################################################
+# Istio mTLS between Apps
+################################################################################
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: istio-apps-mtls
+  namespace: apps
+spec:
+  host: "*.apps.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+################################################################################
+# Google Destination Rules
+################################################################################
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: dr-google-storage-api
+  namespace: apps
+spec:
+  host: storage.googleapis.com
+  trafficPolicy:
+    portLevelSettings:
+      - port:
+          number: 80
+        tls:
+          mode: SIMPLE # initiates HTTPS
+---
+################################################################################
+# Prometheus
+################################################################################
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: prometheus-operator-grafana
+  namespace: apps
+spec:
+  host: prometheus-operator-grafana.monitoring.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: prometheus-operator-prometheus
+  namespace: apps
+spec:
+  host: prometheus-operator-kube-p-prometheus.monitoring.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: prometheus-operator-alertmanager
+  namespace: apps
+spec:
+  host: alertmanager-operated.monitoring.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: prometheus-pushgateway
+  namespace: apps
+spec:
+  host: prometheus-pushgateway.monitoring.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE
