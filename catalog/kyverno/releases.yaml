@@ -5,7 +5,7 @@ metadata:
   name: kyverno
   namespace: kyverno
 spec:
-  interval: 5m
+  interval: 10m0s
   chart:
     spec:
       chart: kyverno
