@@ -15,8 +15,6 @@ spec:
         name: kyverno
       interval: 1m
   install:
-    crds: Create
-    remediation:
-      retries: 10
+    crds: CreateReplace
   upgrade:
     crds: CreateReplace
