@@ -14,80 +14,80 @@ spec:
         kind: HelmRepository
         name: stevehipwell
         namespace: istio-system
-  values:
-    serviceMonitor:
-      enabled: true
-      additionalLabels: {}
-    # If Grafana dashboards should be installed for the sidecar to pick up and apply
-    dashboards:
-      enabled: true
-    controlPlane:
-      install: true
-      spec:
-        ############################################################################
-        # Global
-        ############################################################################
-        hub: gcr.io/istio-release
-        meshConfig:
-          defaultConfig:
-            tracing:
-              sampling: 0.0
-          outboundTrafficPolicy:
-            mode: REGISTRY_ONLY
-
-        components:
-          base:
-            enabled: true
-          cni:
-            enabled: false
-          istiodRemote:
-            enabled: false
-
-          ############################################################################
-          # Pilot
-          # is responsible for the lifecycle of Envoy instances deployed
-          ############################################################################
-          pilot:
-            enabled: true
-            spec:
-              policy:
-                enabled: true
-            k8s:
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 500Mi
-              hpaSpec:
-                minReplicas: 2
-
-          ############################################################################
-          # IngressGateways
-          ############################################################################
-          ingressGateways:
-            - name: istio-ingressgateway
-              enabled: true
-              k8s:
-                resources:
-                  requests:
-                    cpu: 250m
-                    memory: 500Mi
-                hpaSpec:
-                  minReplicas: 2
-                  maxReplicas: 5
-                podAnnotations:
-                  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-                service:
-                  type: ClusterIP
-                serviceAnnotations:
-                  cloud.google.com/backend-config: '{"default": "backend-config"}'
-                  cloud.google.com/neg: '{"ingress": true}'
-
-          ############################################################################
-          # EgressGateways
-          ############################################################################
-          egressGateways:
-            - name: istio-egressgateway
-              enabled: true
-              k8s:
-                hpaSpec:
-                  minReplicas: 2
+#  values:
+#    serviceMonitor:
+#      enabled: true
+#      additionalLabels: {}
+#    # If Grafana dashboards should be installed for the sidecar to pick up and apply
+#    dashboards:
+#      enabled: true
+#    controlPlane:
+#      install: true
+#      spec:
+#        ############################################################################
+#        # Global
+#        ############################################################################
+#        hub: gcr.io/istio-release
+#        meshConfig:
+#          defaultConfig:
+#            tracing:
+#              sampling: 0.0
+#          outboundTrafficPolicy:
+#            mode: REGISTRY_ONLY
+#
+#        components:
+#          base:
+#            enabled: true
+#          cni:
+#            enabled: false
+#          istiodRemote:
+#            enabled: false
+#
+#          ############################################################################
+#          # Pilot
+#          # is responsible for the lifecycle of Envoy instances deployed
+#          ############################################################################
+#          pilot:
+#            enabled: true
+#            spec:
+#              policy:
+#                enabled: true
+#            k8s:
+#              resources:
+#                requests:
+#                  cpu: 100m
+#                  memory: 500Mi
+#              hpaSpec:
+#                minReplicas: 2
+#
+#          ############################################################################
+#          # IngressGateways
+#          ############################################################################
+#          ingressGateways:
+#            - name: istio-ingressgateway
+#              enabled: true
+#              k8s:
+#                resources:
+#                  requests:
+#                    cpu: 250m
+#                    memory: 500Mi
+#                hpaSpec:
+#                  minReplicas: 2
+#                  maxReplicas: 5
+#                podAnnotations:
+#                  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+#                service:
+#                  type: ClusterIP
+#                serviceAnnotations:
+#                  cloud.google.com/backend-config: '{"default": "backend-config"}'
+#                  cloud.google.com/neg: '{"ingress": true}'
+#
+#          ############################################################################
+#          # EgressGateways
+#          ############################################################################
+#          egressGateways:
+#            - name: istio-egressgateway
+#              enabled: true
+#              k8s:
+#                hpaSpec:
+#                  minReplicas: 2
