@@ -15,12 +15,6 @@ spec:
         name: stevehipwell
         namespace: istio-system
   values:
-    serviceMonitor:
-      enabled: true
-      additionalLabels: {}
-#    # If Grafana dashboards should be installed for the sidecar to pick up and apply
-#    dashboards:
-#      enabled: true
     controlPlane:
       install: true
       spec:
