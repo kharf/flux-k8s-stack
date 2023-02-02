@@ -1,5 +1,6 @@
 # istio-stack
 
+[//]: # (todo: update this readme)
 This stack is made up of 3 components:
 
 - the [istio-operator](https://github.com/stevehipwell/helm-charts/tree/master/charts/istio-operator) itself, in the root of this directory
@@ -8,39 +9,49 @@ This stack is made up of 3 components:
 
 ## Usage
 
-To use this stack you have to apply 2 configurations (and the GitRepository source):
+### Setup
 
-First the istio-operator itself:
+To use this stack you have to apply 2 configurations (and the GitRepository source):
 
 ```yaml
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: istio-controlplane
+  name: istio-stack-namespace
   namespace: flux-system
 spec:
-  interval: 10m0s
-  path: ./istio-stack
-  prune: true
-  dependsOn:
-    # The prometheus-operator dependency is required for the istio-operator
-    - name: prometheus-operator
-      namespace: flux-system
+  interval: 10m
+  retryInterval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: gitops-infrastructure-catalog
-  timeout: 10m
-  healthChecks:
-    - kind: Deployment
-      name: istio-ingressgateway
-      namespace: istio-system
-    - kind: Deployment
-      name: istio-egressgateway
-      namespace: istio-system
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-system
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: istio-stack-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/base"
+  prune: true
+  wait: true
 ```
 
-Second, the configuration for the operator resides in the config folder. This configuration is optional, and can be omitted but is recommended. Please make sure the app's namespace is created before using the provided configuration or copy and customize the rules in your own GitOps repository's config folder.
+### Configuration
+
+The catalog also provides default configuration. This configuration is optional, and can be omitted but is recommended.  
+To use the configuration, apply this Kustomization via GitOps
 
 ```yaml
 ---
@@ -50,8 +61,12 @@ metadata:
   name: istio-config
   namespace: flux-system
 spec:
-  interval: 10m0s
-  path: ./istio-stack/config
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/config"
   dependsOn:
     # Please make sure the apps namespace is created
     - name: apps-config
@@ -60,8 +75,8 @@ spec:
     - name: istio-controlplane
       namespace: flux-system
   prune: true
-  sourceRef:
-    kind: GitRepository
-    name: gitops-infrastructure-catalog
-  timeout: 10m
+  wait: true
 ```
+
+The configuration targets the `apps` namespace, so make sure that it's created before using the provided configuration.
+Or alternatively you can copy and customize the rules in your own GitOps repository's config folder.
