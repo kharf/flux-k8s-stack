@@ -68,10 +68,10 @@ spec:
   path: "./catalog/istio-stack/config"
   dependsOn:
     # Please make sure the apps namespace is created
-    - name: apps-config
+    - name: apps
       namespace: flux-system
     # This dependency is required to make sure the operator is deployed before the config is applied
-    - name: istio-controlplane
+    - name: istio-system
       namespace: flux-system
   prune: true
   wait: true
@@ -102,11 +102,11 @@ spec:
   retryInterval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: gitops-infrastructure-catalog
+    name: flux-k8s-stack
   path: "./catalog/istio-stack/kiali"
   dependsOn:
-    # istio controlplane is a hard depenedency
-    - name: istio-controlplane
+    # istio system is a hard dependency
+    - name: istio-system
       namespace: flux-system
     # The prometheus-operator is required for visualization
     - name: prometheus-operator
