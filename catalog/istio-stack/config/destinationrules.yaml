@@ -36,10 +36,10 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: prometheus-operator-grafana
+  name: prometheus-stack-grafana
   namespace: apps
 spec:
-  host: prometheus-operator-grafana.monitoring.svc.cluster.local
+  host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
   trafficPolicy:
     tls:
       mode: DISABLE
@@ -47,10 +47,10 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: prometheus-operator-prometheus
+  name: prometheus-stack-prometheus
   namespace: apps
 spec:
-  host: prometheus-operator-kube-p-prometheus.monitoring.svc.cluster.local
+  host: kube-prometheus-stack-operator.monitoring.svc.cluster.local
   trafficPolicy:
     tls:
       mode: DISABLE
@@ -58,10 +58,10 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: prometheus-operator-alertmanager
+  name: prometheus-stack-alertmanager
   namespace: apps
 spec:
-  host: alertmanager-operated.monitoring.svc.cluster.local
+  host: kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local
   trafficPolicy:
     tls:
       mode: DISABLE
