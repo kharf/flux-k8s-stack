@@ -109,7 +109,7 @@ spec:
     - name: istio-system
       namespace: flux-system
     # The prometheus-operator is required for visualization
-    - name: prometheus-operator
+    - name: kube-prometheus-stack
       namespace: flux-system
   prune: true
   wait: true

@@ -5,7 +5,7 @@ metadata:
   name: istio-operator
   namespace: istio-system
 spec:
-  interval: 30m
+  interval: 10m0s
   chart:
     spec:
       chart: istio-operator
@@ -13,7 +13,11 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: stevehipwell
-        namespace: istio-system
+      interval: 1m
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     controlPlane:
       install: true
