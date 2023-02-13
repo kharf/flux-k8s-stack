@@ -87,5 +87,12 @@ spec:
             - name: istio-egressgateway
               enabled: true
               k8s:
+                resources:
+                  requests:
+                    cpu: 250m
+                    memory: 500Mi
                 hpaSpec:
                   minReplicas: 2
+                  maxReplicas: 5
+                podAnnotations:
+                  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
