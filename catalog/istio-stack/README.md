@@ -78,7 +78,7 @@ spec:
 ```
 
 The configuration targets the `apps` namespace, so make sure that it's created before using the provided configuration.
-Or alternatively you can copy and customize the rules in your own GitOps repository's config folder.
+Or alternatively you can copy and customize the rules in your own GitOps repository's config folder as needed.
 
 ### Sidecar injection
 
@@ -118,6 +118,8 @@ spec:
       name: kiali
       namespace: istio-system
 ```
+
+Make sure to set up `grafana` and `prometheus` before hand in your cluster for Kiali to work correctly.
 
 The Kiali UI can be accessed via a port-forward on port 20001:
 
