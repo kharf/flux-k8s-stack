@@ -35,3 +35,4 @@ You're ready to browse the [catalog](#catalog).
 - [keda](./catalog/keda) - Keda is a Kubernetes based Event Driven Autoscaler. With KEDA, you can drive the scaling of any container in Kubernetes based on the number of events needing to be processed
 - [kyverno](./catalog/kyverno) - Kyverno is a policy engine designed for Kubernetes.
 - [ingress-nginx](./catalog/ingress-nginx) - Ingress-Nginx is an Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer.
+- [istio-stack](./catalog/istio-stack) - Istio is a service mesh for Kubernetes. It provides secure service-to-service communication, automatic load balancing, fine-grained control of traffic behavior and more.
