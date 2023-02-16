@@ -119,7 +119,8 @@ spec:
       namespace: istio-system
 ```
 
-Make sure to set up `grafana` and `prometheus` before hand in your cluster for Kiali to work correctly.
+Make sure to set up `grafana` and `prometheus` via [kube-prometheus-stack](./../kube-prometheus-stack/README.md)
+before hand in your cluster for Kiali's visualization to work correctly.
 
 The Kiali UI can be accessed via a port-forward on port 20001:
 
