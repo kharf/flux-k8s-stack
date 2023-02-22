@@ -11,7 +11,7 @@ spec:
       chart: istio-operator
       version: "1.17.0"
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: istio
       interval: 1m
   install:
