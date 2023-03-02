@@ -8,7 +8,7 @@ spec:
   releaseName: linkerd-crds
   chart:
     spec:
-      chart: linkerd2
+      chart: linkerd-crds
       version: 1.4.0
       sourceRef:
         kind: HelmRepository
