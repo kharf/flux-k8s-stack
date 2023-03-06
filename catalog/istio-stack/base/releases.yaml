@@ -52,11 +52,11 @@ spec:
             cpu: 10m
             memory: 16Mi
     pilot:
-      autoscaleEnabled: false
+      autoscaleMin: 2
       resources:
         requests:
           cpu: 100m
-          memory: 128Mi
+          memory: 500Mi
 ---
 ################################################################################
 # Ingress Gateways
@@ -87,6 +87,8 @@ spec:
       annotations:
         cloud.google.com/backend-config: '{"default": "backend-config"}'
         cloud.google.com/neg: '{"ingress": true}'
+    autoscaling:
+      minReplicas: 2
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 ---
@@ -116,5 +118,7 @@ spec:
     name: istio-egressgateway
     service:
       type: ClusterIP
+    autoscaling:
+      minReplicas: 2
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
