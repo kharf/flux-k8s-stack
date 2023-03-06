@@ -5,15 +5,3 @@ namespace: istio-system
 resources:
   - repositories.yaml
   - releases.yaml
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: istio-system
-  namespace: flux-system
-spec:
-  interval: 10m0s
-  path: ./catalog/istio-stack/base
-  postBuild:
-    substitute:
-      version: "1.17.1"
