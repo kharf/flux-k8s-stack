@@ -46,7 +46,6 @@ spec:
   values:
     global:
       istioNamespace: istio-system
-#      hub: gcr.io/istio-release
       proxy:
         resources:
           requests:
@@ -84,10 +83,10 @@ spec:
   values:
     name: istio-ingressgateway
     service:
-      type: ClusterIP
-    serviceAnnotations:
-      cloud.google.com/backend-config: '{"default": "backend-config"}'
-      cloud.google.com/neg: '{"ingress": true}'
+      type: LoadBalancer
+      annotations:
+        cloud.google.com/backend-config: '{"default": "backend-config"}'
+        cloud.google.com/neg: '{"ingress": true}'
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 ---
