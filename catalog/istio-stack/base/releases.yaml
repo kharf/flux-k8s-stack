@@ -11,7 +11,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.0"
+      version: "${version}"
       chart: base
       sourceRef:
         kind: HelmRepository
@@ -37,7 +37,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.0"
+      version: "${version}"
       chart: istiod
       sourceRef:
         kind: HelmRepository
@@ -52,11 +52,12 @@ spec:
             cpu: 10m
             memory: 16Mi
     pilot:
-      autoscaleEnabled: false
+      autoscaleEnabled: true
+      autoscaleMin: 2
       resources:
         requests:
           cpu: 100m
-          memory: 128Mi
+          memory: 500Mi
 ---
 ################################################################################
 # Ingress Gateways
@@ -75,7 +76,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.0"
+      version: "${version}"
       chart: gateway
       sourceRef:
         kind: HelmRepository
@@ -107,7 +108,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.0"
+      version: "${version}"
       chart: gateway
       sourceRef:
         kind: HelmRepository
