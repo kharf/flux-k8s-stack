@@ -1,4 +1,7 @@
 ---
+################################################################################
+# Base
+################################################################################
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -19,6 +22,9 @@ spec:
   upgrade:
     crds: CreateReplace
 ---
+################################################################################
+# Istiod
+################################################################################
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -27,6 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: istio-base
+      namespace: istio-system
   interval: 10m0s
   chart:
     spec:
@@ -36,30 +43,36 @@ spec:
         kind: HelmRepository
         name: istio
       interval: 1m
-#  values:
-#    global:
-#      istioNamespace: istio-system
-#      proxy:
-#        resources:
-#          requests:
-#            cpu: 10m
-#            memory: 16Mi
-#    pilot:
-#      autoscaleEnabled: false
-#      resources:
-#        requests:
-#          cpu: 100m
-#          memory: 128Mi
+  values:
+    global:
+      istioNamespace: istio-system
+#      hub: gcr.io/istio-release
+      proxy:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+    pilot:
+      autoscaleEnabled: false
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
 ---
+################################################################################
+# Ingress Gateways
+################################################################################
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: istio-gateway
+  name: istio-ingressgateway
   namespace: istio-system
 spec:
   dependsOn:
     - name: istio-base
+      namespace: istio-system
     - name: istiod
+      namespace: istio-system
   interval: 10m0s
   chart:
     spec:
@@ -68,91 +81,41 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: istio
-#  values:
-#    autoscaling:
-#      enabled: false
-#    resources:
-#      requests:
-#        cpu: 10m
-#        memory: 128Mi
-#    service:
-#      type: "${service:=LoadBalancer}"
-
-#  values:
-#    controlPlane:
-#      install: true
-#      spec:
-#        ############################################################################
-#        # Global
-#        ############################################################################
-#        hub: gcr.io/istio-release
-#        meshConfig:
-#          defaultConfig:
-#            tracing:
-#              sampling: 0.0
-#          outboundTrafficPolicy:
-#            mode: REGISTRY_ONLY
-#
-#        components:
-#          base:
-#            enabled: true
-#          cni:
-#            enabled: false
-#          istiodRemote:
-#            enabled: false
-#
-#          ############################################################################
-#          # Pilot
-#          # is responsible for the lifecycle of Envoy instances deployed
-#          ############################################################################
-#          pilot:
-#            enabled: true
-#            spec:
-#              policy:
-#                enabled: true
-#            k8s:
-#              resources:
-#                requests:
-#                  cpu: 100m
-#                  memory: 500Mi
-#              hpaSpec:
-#                minReplicas: 2
-#
-#          ############################################################################
-#          # IngressGateways
-#          ############################################################################
-#          ingressGateways:
-#            - name: istio-ingressgateway
-#              enabled: true
-#              k8s:
-#                resources:
-#                  requests:
-#                    cpu: 250m
-#                    memory: 500Mi
-#                hpaSpec:
-#                  minReplicas: 2
-#                  maxReplicas: 5
-#                podAnnotations:
-#                  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-#                service:
-#                  type: ClusterIP
-#                serviceAnnotations:
-#                  cloud.google.com/backend-config: '{"default": "backend-config"}'
-#                  cloud.google.com/neg: '{"ingress": true}'
-#
-#          ############################################################################
-#          # EgressGateways
-#          ############################################################################
-#          egressGateways:
-#            - name: istio-egressgateway
-#              enabled: true
-#              k8s:
-#                resources:
-#                  requests:
-#                    cpu: 250m
-#                    memory: 500Mi
-#                hpaSpec:
-#                  minReplicas: 2
-#                  maxReplicas: 5
-#                podAnnotations:
-#                  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  values:
+    name: istio-ingressgateway
+    service:
+      type: ClusterIP
+    serviceAnnotations:
+      cloud.google.com/backend-config: '{"default": "backend-config"}'
+      cloud.google.com/neg: '{"ingress": true}'
+    podAnnotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+---
+################################################################################
+# Egress Gateways
+################################################################################
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-egressgateway
+  namespace: istio-system
+spec:
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+    - name: istiod
+      namespace: istio-system
+  interval: 10m0s
+  chart:
+    spec:
+      version: "1.17.0"
+      chart: gateway
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+  values:
+    name: istio-egressgateway
+    service:
+      type: ClusterIP
+    podAnnotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
