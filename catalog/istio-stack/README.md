@@ -1,8 +1,8 @@
 # istio-stack
 
-This stack made it easier to setup a service mesh with [istio](https://istio.io/latest/).  
-It provides the setup for [istio-operator](https://github.com/stevehipwell/helm-charts/tree/master/charts/istio-operator) with sensible defaults
-and also provides optional configurations for destination rules and service entries.  
+This stack made it easier to setup a service mesh with [istio](https://istio.io/latest/),
+using the the [official provided charts](https://artifacthub.io/packages/search?ts_query_web=istio&official=true&sort=relevance&page=1).
+
 Furthermore [Kiali](https://kiali.io/) with a preconfigured [Kiali-operator](https://github.com/kiali/helm-charts/tree/master/kiali-operator)
 can be setup as well for configuring, visualizing, validating and troubleshooting your service mesh.
 
