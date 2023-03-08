@@ -7,13 +7,12 @@ resources:
 #  - releases.yaml
 patches:
   - target:
-      kind: Deployment
+      kind: HelmRelease
       name: istio-ingressgateway
       namespace: istio-system
     patch: |-
       - op: add
-        path: /spec/values/service
+        path: /spec/values/service/annotations
         value:
-          annotations:
-            cloud.google.com/backend-config: '{"default": "backend-config"}'
-            cloud.google.com/neg: '{"ingress": true}'
+          cloud.google.com/backend-config: '{"default": "backend-config"}'
+          cloud.google.com/neg: '{"ingress": true}'
