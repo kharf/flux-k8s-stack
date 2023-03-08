@@ -4,7 +4,8 @@ kind: Kustomization
 namespace: istio-system
 resources:
   - ../base
-#  - releases.yaml
+  - google-destinationrules.yaml
+  - google-serviceentries.yaml
 patches:
   - target:
       kind: HelmRelease

@@ -8,7 +8,7 @@ can be setup as well for configuring, visualizing, validating and troubleshootin
 
 ## Usage
 
-### Setup
+### Basic setup
 
 To use this stack you have to apply 2 configurations (and the GitRepository source):
 
@@ -47,17 +47,16 @@ spec:
   wait: true
 ```
 
-### Configuration
+### Setup with GKE
 
-The catalog also provides default configuration. This configuration is optional, and can be omitted but is recommended.  
-To use the configuration, apply this Kustomization via GitOps
+[//]: # (TODO: add description)
 
 ```yaml
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: istio-config
+  name: istio-stack-namespace
   namespace: flux-system
 spec:
   interval: 10m
@@ -65,26 +64,54 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-k8s-stack
-  path: "./catalog/istio-stack/config"
+  path: "./catalog/istio-stack/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-system
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
   dependsOn:
-    # Please make sure the apps namespace is created
-    - name: apps
-      namespace: flux-system
-    # This dependency is required to make sure the operator is deployed before the config is applied
-    - name: istio-system
-      namespace: flux-system
+    - name: istio-stack-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/gke"
   prune: true
   wait: true
 ```
-
-The configuration targets the `apps` namespace, so make sure that it's created before using the provided configuration.
-Or alternatively you can copy and customize the rules in your own GitOps repository's config folder as needed.
 
 ### Sidecar injection
 
 Istio sidecar can be injected [automatically](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
 or [manually](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#manual-sidecar-injection)
 or [via a custom injection template](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#customizing-injection).
+
+### Setup mutual TLS
+
+To setup [Istio mutual TLS](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/) between your apps,
+a destination rule like below needs to be defined.
+
+**Note**: Depend on your cluster setup, the `apps` name in the `metadata` and `host` needs to be adjusted accordingly.
+
+```yaml
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: istio-mtls
+  namespace: apps
+spec:
+  host: "*.apps.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+```
 
 ### Kiali
 
@@ -107,10 +134,8 @@ spec:
   dependsOn:
     # istio system is a hard dependency
     - name: istio-system
-      namespace: flux-system
     # The prometheus-operator is required for visualization
     - name: kube-prometheus-stack
-      namespace: flux-system
   prune: true
   wait: true
   healthChecks:
