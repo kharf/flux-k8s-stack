@@ -47,48 +47,6 @@ spec:
   wait: true
 ```
 
-### Setup with GKE
-
-This will set up the base istio and additionally add some common destination rules and service entries for your application(s).
-
-**Note**: The rules and entries are targeting the namespace `apps`. So make sure to adjust the namespace via patch if needed.
-
-
-```yaml
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: istio-stack-namespace
-  namespace: flux-system
-spec:
-  interval: 10m
-  retryInterval: 1m0s
-  sourceRef:
-    kind: GitRepository
-    name: flux-k8s-stack
-  path: "./catalog/istio-stack/namespace"
-  prune: true
-  wait: true
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: istio-system
-  namespace: flux-system
-spec:
-  interval: 10m
-  retryInterval: 1m0s
-  dependsOn:
-    - name: istio-stack-namespace
-  sourceRef:
-    kind: GitRepository
-    name: flux-k8s-stack
-  path: "./catalog/istio-stack/gke"
-  prune: true
-  wait: true
-```
-
 ### Sidecar injection
 
 Istio sidecar can be injected [automatically](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
@@ -97,10 +55,8 @@ or [via a custom injection template](https://istio.io/latest/docs/setup/addition
 
 ### Setup mutual TLS
 
-To setup [Istio mutual TLS](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/) between your apps,
+To setup [Istio mutual TLS](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/) in a namespace,
 a destination rule like below needs to be defined.
-
-**Note**: Depend on your cluster setup, the `apps` name in the `metadata` and `host` needs to be adjusted accordingly.
 
 ```yaml
 ---
@@ -115,6 +71,8 @@ spec:
     tls:
       mode: ISTIO_MUTUAL
 ```
+
+In this example, the `apps` namespace is targeted.
 
 ### Kiali
 
