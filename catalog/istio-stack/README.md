@@ -47,6 +47,45 @@ spec:
   wait: true
 ```
 
+### Setup with GKE
+
+This will set up the base istio and additionally add some google specific annotations to the ingress gateway.
+
+```yaml
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-stack-namespace
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-system
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: istio-stack-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/istio-stack/gke"
+  prune: true
+  wait: true
+```
+
 ### Sidecar injection
 
 Istio sidecar can be injected [automatically](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
