@@ -49,7 +49,10 @@ spec:
 
 ### Setup with GKE
 
-[//]: # (TODO: add description)
+This will set up the base istio and additionally add some common destination rules and service entries for your application(s).
+
+**Note**: The rules and entries are targeting the namespace `apps`. So make sure to adjust the namespace via patch if needed.
+
 
 ```yaml
 ---
