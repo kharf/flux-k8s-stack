@@ -1,0 +1,116 @@
+---
+################################################################################
+# Base
+################################################################################
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-base
+  namespace: istio-system
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      version: "1.17.1"
+      chart: base
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+      interval: 1m
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+---
+################################################################################
+# Istiod
+################################################################################
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istiod
+  namespace: istio-system
+spec:
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+  interval: 10m0s
+  chart:
+    spec:
+      version: "1.17.1"
+      chart: istiod
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+      interval: 1m
+  values:
+    global:
+      istioNamespace: istio-system
+      proxy:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+    pilot:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 500Mi
+---
+################################################################################
+# Ingress Gateways
+################################################################################
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-system
+spec:
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+    - name: istiod
+      namespace: istio-system
+  interval: 10m0s
+  chart:
+    spec:
+      version: "1.17.1"
+      chart: gateway
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+  values:
+    name: istio-ingressgateway
+    service:
+      type: LoadBalancer
+    podAnnotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+---
+################################################################################
+# Egress Gateways
+################################################################################
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-egressgateway
+  namespace: istio-system
+spec:
+  dependsOn:
+    - name: istio-base
+      namespace: istio-system
+    - name: istiod
+      namespace: istio-system
+  interval: 10m0s
+  chart:
+    spec:
+      version: "1.17.1"
+      chart: gateway
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+  values:
+    name: istio-egressgateway
+    service:
+      type: ClusterIP
+    podAnnotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"

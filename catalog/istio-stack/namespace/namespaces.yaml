@@ -1,0 +1,7 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: istio-system
+  labels:
+    istio-operator-managed: Reconcile

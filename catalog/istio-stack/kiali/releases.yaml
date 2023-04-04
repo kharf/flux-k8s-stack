@@ -1,0 +1,50 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kiali-operator
+  namespace: istio-system
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: kiali-operator
+      version: "1.63.1"
+      sourceRef:
+        kind: HelmRepository
+        name: kiali
+      interval: 1m
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    onlyViewOnlyMode: true
+    watchNamespace: ""
+
+    # For what a Kiali CR spec can look like, see:
+    # https://github.com/kiali/kiali-operator/blob/master/crd-docs/cr/kiali.io_v1alpha1_kiali.yaml
+    cr:
+      create: true
+      name: kiali-operator
+      namespace: "istio-system"
+      spec:
+        installation_tag: "Kiali - View Only"
+        istio_namespace: "istio-system"
+        auth:
+          strategy: "anonymous"
+        deployment:
+          accessible_namespaces:
+            - '**'
+          view_only_mode: true
+          instance_name: "kiali"
+        external_services:
+          custom_dashboards:
+            enabled: true
+            is_core: false
+          grafana:
+            url: "http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local"
+          prometheus:
+            url: "http://kube-prometheus-stack-operator.monitoring.svc.cluster.local:9090"
+        server:
+          web_root: "/kiali"
