@@ -27,7 +27,7 @@ jobs:
         env:
           MR_GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
-          curl -L https://github.com/kharf/monoreleaser/releases/download/v0.0.4/monoreleaser-linux-amd64 --output monoreleaser
+          curl -L https://github.com/kharf/monoreleaser/releases/download/v0.0.6/monoreleaser-linux-amd64 --output monoreleaser
           chmod +x monoreleaser
           ./monoreleaser release . ${{ inputs.version }}
 
