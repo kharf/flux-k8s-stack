@@ -1,0 +1,48 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kube-prometheus-stack-namespace
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/kube-prometheus-stack/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kube-prometheus-stack
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: kube-prometheus-stack-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/kube-prometheus-stack/base"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: loki-stack
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: kube-prometheus-stack
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/loki-stack"
+  prune: true
+  wait: true

@@ -6,3 +6,6 @@ keys/
 *.pem
 .gradle
 gradle
+
+// act pull request event definition
+pr-event.json

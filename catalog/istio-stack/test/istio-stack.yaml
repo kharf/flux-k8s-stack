@@ -1,0 +1,59 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-stack-namespace
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/istio-stack/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: istio-stack
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: istio-stack-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/istio-stack/gke"
+  prune: true
+  wait: true
+  patches:
+    - patch: |
+        - op: replace
+          path: /spec/values
+          value:
+            service:
+              type: ClusterIP
+      target:
+        kind: HelmRelease
+        name: istio-ingressgateway
+        namespace: istio-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kiali
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: istio-stack
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/istio-stack/kiali"
+  prune: true
+  wait: true
