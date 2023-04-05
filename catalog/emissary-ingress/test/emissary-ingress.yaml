@@ -1,0 +1,60 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: emissary-ingress-namespace
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/emissary-ingress/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: emissary-ingress-config
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: emissary-ingress-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/emissary-ingress/test/config"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: emissary-ingress
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: emissary-ingress-namespace
+    - name: emissary-ingress-config
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/emissary-ingress/gke"
+  prune: true
+  wait: true
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/install
+          value:
+            remediation:
+              retries: -1
+      target:
+        kind: HelmRelease
+        name: emissary-ingress
+        namespace: ingress

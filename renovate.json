@@ -9,4 +9,7 @@
   "flux": {
     "fileMatch": ["\\.yaml$"]
   }
+  "github-actions": {
+      "fileMatch": ["^.github/(?:workflows|actions)/.+\\.cue$"]
+  }
 }

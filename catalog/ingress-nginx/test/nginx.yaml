@@ -1,0 +1,43 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: ingress-nginx-namespace
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/ingress-nginx/namespace"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: ingress-nginx
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: ingress-nginx-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: "./catalog/ingress-nginx"
+  prune: true
+  wait: true
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/values
+          value:
+            controller:
+              service:
+                type: ClusterIP
+      target:
+        kind: HelmRelease
+        name: ingress-nginx
+        namespace: ingress-nginx
