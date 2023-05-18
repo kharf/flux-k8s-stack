@@ -26,7 +26,6 @@ You're ready to browse the [catalog](#catalog).
 ## catalog
 
 - [cert-manager](./catalog/cert-manager) - Cert-manager adds certificates and certificate issuers as resource types in Kubernetes clusters, and simplifies the process of obtaining, renewing and using those certificates
-- [contour](./catalog/contour) - Contour is an open source Kubernetes ingress controller providing the control plane for the Envoy edge and service proxy
 - [emissary-ingress](./catalog/emissary-ingress) - Emissary-Ingress is an open-source Kubernetes-native API Gateway + Layer 7 load balancer + Kubernetes Ingress built on Envoy Proxy
 - [kube-prometheus-stack](./catalog/kube-prometheus-stack) - Kube-Prometheus-Stack is a collection of Kubernetes manifests, Grafana dashboards, and Prometheus rules combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator
 - [prometheus-stackdriver-exporter](/catalog/prometheus-stackdriver-exporter) - Prometheus-Stackdriver-Exporter is a proxy that requests Stackdriver API for the metric's time-series everytime prometheus scrapes it.
