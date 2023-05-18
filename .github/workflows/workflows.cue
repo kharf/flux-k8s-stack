@@ -36,7 +36,7 @@ lintWorkflow: _#workflow & {
 				_#checkoutCode,
 				{
 					name: "Setup python"
-					uses: "actions/setup-python@v4"
+					uses: "actions/setup-python@v4.6.0"
 				},
 				{
 					name: "Lint"
