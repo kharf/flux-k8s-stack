@@ -108,7 +108,10 @@ renovateWorkflow: _#workflow & {
 				{
 					name: "Renovate"
 					uses: "renovatebot/github-action@v37.0.0"
-					env: RENOVATE_REPOSITORIES: "${{ github.repository }}"
+					env: {
+						LOG_LEVEL:             "debug"
+						RENOVATE_REPOSITORIES: "${{ github.repository }}"
+					}
 					with: {
 						configurationFile: "renovate.json"
 						token:             "${{ secrets.PAT }}"
