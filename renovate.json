@@ -9,6 +9,9 @@
   "flux": {
     "fileMatch": ["\\.yaml$"]
   },
+  "github-actions": {
+    "enabled": false
+  },
   "regexManagers": [
     {
      "fileMatch": ["^.github/workflows/(.*?).cue$"],
