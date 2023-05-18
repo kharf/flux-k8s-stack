@@ -13,7 +13,8 @@
     {
      "fileMatch": ["^.github/workflows/(.*?).cue$"],
      "matchStrings": ["uses: \"(?<depName>.*?)@(?<currentValue>.*?)\""],
-     "datasourceTemplate": "github-tags"
+     "datasourceTemplate": "github-tags",
+     "versioningTemplate": "semver-coerced"
     }
   ]
 }
