@@ -128,7 +128,11 @@ _#test: _#workflow & {
 	workflow: github.#Workflow & {
 		name: "\(tool)-test"
 		on: {
-			workflow_dispatch: null
+			workflow_dispatch: {
+				branches: [
+					"main",
+				]
+			}
 			pull_request: {
 				branches: [
 					"*",
@@ -146,7 +150,7 @@ _#test: _#workflow & {
 			GITHUB_USER:    "kharf"
 			GITHUB_TOKEN:   "${{ secrets.PAT }}"
 			REPOSITORY_URL: "https://github.com/kharf/flux-k8s-stack"
-			BRANCH:         "${{ github.event.pull_request.head.ref }}"
+			BRANCH:         "${{ github.ref_name }}"
 			KS_PATH:        "./catalog/\(tool)/test"
 		}
 
