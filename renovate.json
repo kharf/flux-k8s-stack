@@ -10,6 +10,6 @@
     "fileMatch": ["\\.yaml$"]
   },
   "github-actions": {
-      "fileMatch": ["^.github/(?:workflows|actions)/.+\\.cue$"]
+      "fileMatch": ["^.github/workflows/(.*?).cue$"]
   }
 }
