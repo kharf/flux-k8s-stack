@@ -11,8 +11,8 @@
   },
   "regexManagers": [
     {
-     "fileMatch": ["^.github/workflows/(.*?).cue$"]
-     "matchStrings": ["uses: (?<depName>.*?)@(?<currentValue>.*?)"],
+     "fileMatch": ["^.github/workflows/(.*?).cue$"],
+     "matchStrings": ["uses: \"(?<depName>.*?)@(?<currentValue>.*?)\""],
      "datasourceTemplate": "github-tags"
     }
   ]
