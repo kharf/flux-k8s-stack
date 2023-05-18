@@ -9,7 +9,11 @@
   "flux": {
     "fileMatch": ["\\.yaml$"]
   },
-  "github-actions": {
-    "fileMatch": ["^.github/workflows/(.*?).cue$"]
-  }
+  "regexManagers": [
+    {
+     "fileMatch": ["^.github/workflows/(.*?).cue$"]
+     "matchStrings": ["uses: \"(?<depName>.*?)@(?<currentValue>.*?)\""],
+     "datasourceTemplate": "github-tags"
+    }
+  ]
 }
