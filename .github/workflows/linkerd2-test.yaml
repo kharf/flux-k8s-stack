@@ -5,6 +5,13 @@ name: linkerd2-test
   workflow_dispatch:
     branches:
       - main
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+    paths:
+      - catalog/linkerd2/**
   pull_request:
     branches:
       - '*'

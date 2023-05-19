@@ -5,6 +5,13 @@ name: kube-prometheus-stack-test
   workflow_dispatch:
     branches:
       - main
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+    paths:
+      - catalog/kube-prometheus-stack/**
   pull_request:
     branches:
       - '*'

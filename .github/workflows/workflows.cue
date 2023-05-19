@@ -189,6 +189,17 @@ _#test: _#workflow & {
 					"main",
 				]
 			}
+			push: {
+				branches: [
+					"main",
+				]
+				"tags-ignore": [
+					"*",
+				]
+				paths: [
+					"catalog/\(tool)/**",
+				]
+			}
 			pull_request: {
 				branches: [
 					"*",

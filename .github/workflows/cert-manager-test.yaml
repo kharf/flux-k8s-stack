@@ -5,6 +5,13 @@ name: cert-manager-test
   workflow_dispatch:
     branches:
       - main
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+    paths:
+      - catalog/cert-manager/**
   pull_request:
     branches:
       - '*'

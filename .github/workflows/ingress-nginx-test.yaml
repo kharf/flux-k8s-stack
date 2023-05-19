@@ -5,6 +5,13 @@ name: ingress-nginx-test
   workflow_dispatch:
     branches:
       - main
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+    paths:
+      - catalog/ingress-nginx/**
   pull_request:
     branches:
       - '*'

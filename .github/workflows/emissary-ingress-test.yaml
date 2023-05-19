@@ -5,6 +5,13 @@ name: emissary-ingress-test
   workflow_dispatch:
     branches:
       - main
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+    paths:
+      - catalog/emissary-ingress/**
   pull_request:
     branches:
       - '*'
