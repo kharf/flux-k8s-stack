@@ -138,7 +138,7 @@ genWorkflow: _#workflow & {
 					"*",
 				]
 				paths: [
-					"./.github/workflows/**",
+					".github/workflows/**",
 				]
 			}
 		}
@@ -193,7 +193,7 @@ _#test: _#workflow & {
 					"*",
 				]
 				paths: [
-					"./catalog/\(tool)/**",
+					"catalog/\(tool)/**",
 				]
 			}
 		}

@@ -11,7 +11,7 @@ name: ingress-nginx-test
     tags-ignore:
       - '*'
     paths:
-      - ./catalog/ingress-nginx/**
+      - catalog/ingress-nginx/**
 env:
   GITHUB_USER: kharf
   GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT }}
       - name: Test
