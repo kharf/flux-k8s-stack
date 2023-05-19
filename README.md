@@ -20,7 +20,7 @@ spec:
 
 Recommendation: Use [Renovatebot](https://docs.renovatebot.com/modules/manager/flux/#gitrepository-support) to configure automatic updates for this catalog.
 
-You're ready to browse the [catalog](#catalog).
+You're ready to browse the [Catalog](#Catalog).
 
 ---
 ## Compatibility
@@ -30,7 +30,7 @@ Starting with v4.2.0 we keep track of compatibility between this catalog and flu
 | v4.2.0                 | v2.0.0-rc.3   |
 
 ---
-## catalog
+## Catalog
 | tool                                                                       | test status                  | description                                                                                                                                        |
 | ------------------------------------------------------                     | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [cert-manager](./catalog/cert-manager)                                     | [![cert-manager-test](https://github.com/kharf/flux-k8s-stack/actions/workflows/cert-manager-test.yaml/badge.svg)](https://github.com/kharf/flux-k8s-stack/actions/workflows/cert-manager-test.yaml)   | Cert-manager adds certificates and certificate issuers as resource types in Kubernetes clusters, and simplifies the process of obtaining, renewing and using those certificates. |
