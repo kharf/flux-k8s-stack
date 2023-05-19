@@ -10,7 +10,7 @@ _#workflow: {
 
 _#checkoutCode: {
 	name: "Checkout code"
-	uses: "actions/checkout@v3.5.2"
+	uses: "actions/checkout@v3"
 }
 
 lintWorkflow: _#workflow & {
