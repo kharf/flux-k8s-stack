@@ -23,7 +23,6 @@ jobs:
         working-directory: .github/workflows
         run: |-
           cue cmd genworkflows
-          cue cmd cleanyamlworkflows
           cue cmd genyamlworkflows
       - name: Create PR
         uses: peter-evans/create-pull-request@v5

@@ -158,7 +158,6 @@ genWorkflow: _#workflow & {
 					"working-directory": ".github/workflows"
 					run: """
 						cue cmd genworkflows
-						cue cmd cleanyamlworkflows
 						cue cmd genyamlworkflows
 						"""
 				},
