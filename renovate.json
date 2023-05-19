@@ -24,6 +24,12 @@
      "matchStrings": ["https://github.com/(?<depName>.*?)/releases/download/(?<currentValue>.*?)/"],
      "datasourceTemplate": "github-releases",
      "versioningTemplate": "semver-coerced"
+    },
+    {
+     "fileMatch": ["^.(.*?).md$"],
+     "matchStrings": ["\\s*url:\\s*https://github.com/(?<depName>.*?)\\n\\s*ref:\\n\\s*tag:\\s*(?<currentValue>.*?)\\n"],
+     "datasourceTemplate": "github-releases",
+     "versioningTemplate": "semver-coerced"
     }
   ]
 }
