@@ -206,7 +206,7 @@ _#test: _#workflow & {
 			GITHUB_USER:    "kharf"
 			GITHUB_TOKEN:   "${{ secrets.PAT }}"
 			REPOSITORY_URL: "https://github.com/kharf/flux-k8s-stack"
-			BRANCH:         "${{ github.ref_name }}"
+			BRANCH:         "${{ github.head_ref || github.ref_name }}"
 			KS_PATH:        "./catalog/\(tool)/test"
 		}
 
