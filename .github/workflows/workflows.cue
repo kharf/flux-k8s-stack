@@ -122,6 +122,55 @@ renovateWorkflow: _#workflow & {
 	}
 }
 
+genWorkflow: _#workflow & {
+	filename: "gen.yaml"
+	workflow: github.#Workflow & {
+		name: "generate"
+		on: {
+			push: {
+				branches: [
+					"main",
+				]
+				"tags-ignore": [
+					"*",
+				]
+				paths: [
+					"./github/workflows/**",
+				]
+			}
+		}
+
+		permissions: "read-all"
+
+		jobs: generate: {
+			"runs-on": "ubuntu-latest"
+			steps: [
+				_#checkoutCode,
+				{
+					name: "Setup CUE"
+					uses: "cue-lang/setup-cue@v1"
+				},
+				{
+					name:                "Generate"
+					"working-directory": ".github/workflows"
+					run: """
+						cue cmd genworkflows
+						cue cmd cleanyamlworkflows
+						cue cmd genyamlworkflows
+						"""
+				},
+				{
+					name: "Create PR"
+					uses: "peter-evans/create-pull-request@v5"
+					with: {
+						token: "${{ secrets.PAT }}"
+					}
+				},
+			]
+		}
+	}
+}
+
 _#test: _#workflow & {
 	tool:     string
 	filename: "\(tool)-test.yaml"
