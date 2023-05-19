@@ -27,7 +27,9 @@ jobs:
           cue cmd genworkflows
           cue cmd genyamlworkflows
       - name: Create PR
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v5.0.1
         with:
           token: ${{ secrets.PAT }}
+          commit-message: 'chore: update yamls generated from cue definitions'
+          tile: Update yamls generated from cue definitions
 permissions: read-all
