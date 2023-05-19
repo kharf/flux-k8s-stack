@@ -168,7 +168,9 @@ genWorkflow: _#workflow & {
 					name: "Create PR"
 					uses: "peter-evans/create-pull-request@v5.0.1"
 					with: {
-						token: "${{ secrets.PAT }}"
+						token:            "${{ secrets.PAT }}"
+						"commit-message": "chore: update yamls generated from cue definitions"
+						"tile":           "Update yamls generated from cue definitions"
 					}
 				},
 			]
