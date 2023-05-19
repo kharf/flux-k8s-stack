@@ -139,6 +139,7 @@ genWorkflow: _#workflow & {
 				]
 				paths: [
 					".github/workflows/**",
+					"catalog/**",
 				]
 			}
 		}
