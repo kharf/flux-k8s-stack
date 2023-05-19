@@ -8,7 +8,7 @@ name: generate
     tags-ignore:
       - '*'
     paths:
-      - ./github/workflows/**
+      - ./.github/workflows/**
 jobs:
   generate:
     runs-on: ubuntu-latest
