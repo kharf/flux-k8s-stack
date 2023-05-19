@@ -18,6 +18,12 @@
      "matchStrings": ["uses: \"(?<depName>.*?)@(?<currentValue>.*?)\""],
      "datasourceTemplate": "github-tags",
      "versioningTemplate": "semver-coerced"
+    },
+    {
+     "fileMatch": ["^.github/workflows/(.*?).cue$"],
+     "matchStrings": ["https://github.com/(?<depName>.*?)/releases/download/(?<currentValue>.*?)/"],
+     "datasourceTemplate": "github-releases",
+     "versioningTemplate": "semver-coerced"
     }
   ]
 }
