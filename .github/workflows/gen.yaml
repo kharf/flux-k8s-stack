@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
+        with:
+          token: ${{ secrets.PAT }}
       - name: Setup CUE
         uses: cue-lang/setup-cue@v1
       - name: Generate

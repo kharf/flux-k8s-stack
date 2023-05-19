@@ -14,10 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
+        uses: actions/checkout@v3.5.2
         with:
+          token: ${{ secrets.PAT }}
           ref: ${{ github.event.inputs.branch }}
           fetch-depth: "0"
-        uses: actions/checkout@v3
       - name: Release
         env:
           MR_GITHUB_TOKEN: ${{ secrets.PAT }}
