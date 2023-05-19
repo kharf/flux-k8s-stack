@@ -5,6 +5,7 @@
 # - github user to be used (GITHUB_USER)
 # - url to the git repository (REPOSITORY_URL)
 # - git branch (BRANCH)
+# - name of the kind k8s cluster (CLUSTER_NAME)
 # - Path to the Test Kustomization (KS_PATH)
 
 # install flux
@@ -31,9 +32,9 @@ if [ $? -eq 1 ]; then
 fi
 
 # create k8s cluster
-kind delete cluster --name $BRANCH
-kind create cluster --name $BRANCH
-CONTEXT=kind-$BRANCH
+kind delete cluster --name $CLUSTER_NAME
+kind create cluster --name $CLUSTER_NAME
+CONTEXT=kind-$CLUSTER_NAME
 kubectl cluster-info --context $CONTEXT
 
 # install flux on k8s cluster
