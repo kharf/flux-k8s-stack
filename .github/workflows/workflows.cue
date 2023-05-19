@@ -170,7 +170,7 @@ genWorkflow: _#workflow & {
 					with: {
 						token:            "${{ secrets.PAT }}"
 						"commit-message": "chore: update yamls generated from cue definitions"
-						"title":          "Update yamls generated from cue definitions"
+						"title":          "chore: update yamls generated from cue definitions"
 					}
 				},
 			]
