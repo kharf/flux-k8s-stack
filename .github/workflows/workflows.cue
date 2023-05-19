@@ -152,6 +152,9 @@ genWorkflow: _#workflow & {
 				{
 					name: "Setup CUE"
 					uses: "cue-lang/setup-cue@v0.0.1"
+					with: {
+						version: "v0.5.0"
+					}
 				},
 				{
 					name:                "Generate"

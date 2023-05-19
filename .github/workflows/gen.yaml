@@ -19,6 +19,8 @@ jobs:
           token: ${{ secrets.PAT }}
       - name: Setup CUE
         uses: cue-lang/setup-cue@v0.0.1
+        with:
+          version: v0.5.0
       - name: Generate
         working-directory: .github/workflows
         run: |-
