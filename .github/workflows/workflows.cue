@@ -166,7 +166,7 @@ genWorkflow: _#workflow & {
 				},
 				{
 					name: "Create PR"
-					uses: "peter-evans/create-pull-request@v5"
+					uses: "peter-evans/create-pull-request@v5.0.1"
 					with: {
 						token: "${{ secrets.PAT }}"
 					}
