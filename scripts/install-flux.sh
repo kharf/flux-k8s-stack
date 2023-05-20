@@ -5,7 +5,7 @@ DEFAULT_BIN_DIR="/usr/local/bin"
 BIN_DIR=${1:-"${DEFAULT_BIN_DIR}"}
 # do not edit the next 3 lines as it is captured by renovate via regex, else update renovate.json
 GITHUB_REPO="fluxcd/flux2"
-VERSION_FLUX="v2.0.0-rc.2"
+VERSION_FLUX="v0.41.1"
 VERSION_FLUX=`echo $VERSION_FLUX | sed 's/^v\(.*\)/\1/'`
 
 # Helper functions for logs
