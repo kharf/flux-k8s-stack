@@ -13,7 +13,7 @@ set -e
 if [ ! -f /usr/local/bin/flux ]; then
   echo "Flux not installed, installing ..."
   flux_script_path="$(dirname $(realpath $0))/install-flux.sh"
-  sh $flux_script_path
+  bash $flux_script_path
 fi
 
 # install kind
