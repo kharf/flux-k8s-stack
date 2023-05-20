@@ -8,10 +8,12 @@
 # - name of the kind k8s cluster (CLUSTER_NAME)
 # - Path to the Test Kustomization (KS_PATH)
 
+set -e
 # install flux
 if [ ! -f /usr/local/bin/flux ]; then
   echo "Flux not installed, installing ..."
-  curl -s https://fluxcd.io/install.sh | bash
+  flux_script_path="$(dirname $(realpath $0))/install-flux.sh"
+  sh $flux_script_path
 fi
 
 # install kind
@@ -48,6 +50,8 @@ flux create source git flux-system \
 --branch=$BRANCH \
 --password=$GITHUB_TOKEN \
 --username=$GITHUB_USER
+
+set +e
 flux create kustomization infrastructure \
 --context=$CONTEXT \
 --source=flux-system \

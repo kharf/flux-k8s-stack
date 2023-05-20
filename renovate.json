@@ -26,8 +26,14 @@
      "versioningTemplate": "semver-coerced"
     },
     {
-     "fileMatch": ["^.(.*?).md$"],
+     "fileMatch": ["^(.*?).md$"],
      "matchStrings": ["\\s*url:\\s*https://github.com/(?<depName>.*?)\\n\\s*ref:\\n\\s*tag:\\s*(?<currentValue>.*?)\\n"],
+     "datasourceTemplate": "github-releases",
+     "versioningTemplate": "semver-coerced"
+    },
+    {
+     "fileMatch": ["^(.*?).sh$"],
+     "matchStrings": ["GITHUB_REPO=\"(?<depName>.*?)\"\\nVERSION_FLUX=\"(?<currentValue>.*?)\"\\n"],
      "datasourceTemplate": "github-releases",
      "versioningTemplate": "semver-coerced"
     }
