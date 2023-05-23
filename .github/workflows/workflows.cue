@@ -97,9 +97,11 @@ renovateWorkflow: _#workflow & {
 	workflow: github.#Workflow & {
 		name: "renovate"
 		on: {
-			workflow_dispatch: {
-				schedule: cron: "0 5 * * 1-5"
-			}
+			workflow_dispatch: null
+			schedule: [{
+				cron: "0 5 * * 1-5"
+			},
+			]
 		}
 
 		permissions: "read-all"

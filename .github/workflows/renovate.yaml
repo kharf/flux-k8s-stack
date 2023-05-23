@@ -2,9 +2,9 @@
 
 name: renovate
 "on":
-  workflow_dispatch:
-    schedule:
-      cron: 0 5 * * 1-5
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 5 * * 1-5
 jobs:
   renovate:
     runs-on: ubuntu-latest
