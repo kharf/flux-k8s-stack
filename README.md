@@ -27,6 +27,7 @@ You're ready to browse the [Catalog](#Catalog).
 Starting with v4.2.0 we keep track of compatibility between this catalog and flux2. Other versions might work too as long as there are no breaking changes.
 | flux-k8s-stack version | flux2 version |
 | ---------------------- | ------------- |
+| v5                     | v0.41.2       |
 | v4                     | v0.41.2       |
 
 ---
