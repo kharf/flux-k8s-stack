@@ -6,6 +6,8 @@
   "platform": "github",
   "semanticCommits": "enabled",
   "rebaseWhen": "auto",
+  "branchConcurrentLimit": 0,
+  "prConcurrentLimit": 0,
   "flux": {
     "fileMatch": ["\\.yaml$"]
   },
