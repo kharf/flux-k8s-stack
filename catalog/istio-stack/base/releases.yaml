@@ -74,7 +74,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.3"
+      version: "1.18.0"
       chart: gateway
       sourceRef:
         kind: HelmRepository
@@ -103,7 +103,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.17.3"
+      version: "1.18.0"
       chart: gateway
       sourceRef:
         kind: HelmRepository
