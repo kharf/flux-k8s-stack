@@ -112,7 +112,7 @@ renovateWorkflow: _#workflow & {
 				_#checkoutCode,
 				{
 					name: "Renovate"
-					uses: "renovatebot/github-action@v38.1.3"
+					uses: "renovatebot/github-action@v38.1.4"
 					env: {
 						LOG_LEVEL:             "debug"
 						RENOVATE_REPOSITORIES: "${{ github.repository }}"
