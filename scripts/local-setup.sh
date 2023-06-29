@@ -8,16 +8,15 @@
 # - name of the kind k8s cluster (CLUSTER_NAME)
 # - Path to the Test Kustomization (KS_PATH)
 
-set -e
 # install flux
-if [ ! -f /usr/local/bin/flux ]; then
+if ! which flux > /dev/null; then
   echo "Flux not installed, installing ..."
   flux_script_path="$(dirname $(realpath $0))/install-flux.sh"
   bash $flux_script_path
 fi
 
 # install kind
-if [ ! -f /usr/local/bin/kind ]; then
+if ! which kind > /dev/null; then
   echo "Kind not installed, installing ..."
   curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/latest/download/kind-linux-amd64
   chmod +x ./kind
@@ -25,14 +24,14 @@ if [ ! -f /usr/local/bin/kind ]; then
 fi
 
 # install kubectl
-which kubectl
-if [ $? -eq 1 ]; then
+if ! which kubectl > /dev/null; then
   echo "Kubectl not installed, installing ..."
   curl -Lo ./kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
   chmod +x ./kubectl
   sudo mv ./kubectl /usr/local/bin/kubectl
 fi
 
+set -e
 # create k8s cluster
 kind delete cluster --name $CLUSTER_NAME
 kind create cluster --name $CLUSTER_NAME
@@ -58,7 +57,7 @@ flux create kustomization infrastructure \
 --path=$KS_PATH \
 --prune=true \
 --wait=true \
---health-check-timeout=6m
+--health-check-timeout=8m
 
 if [ $? -eq 0 ]
 then

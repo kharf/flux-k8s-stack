@@ -7,8 +7,8 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: loki-stack
-      version: 2.9.10
+      chart: loki
+      version: 5.8.7
       sourceRef:
         kind: HelmRepository
         name: loki
@@ -19,18 +19,19 @@ spec:
     crds: CreateReplace
   values:
     loki:
-      enabled: true
-      isDefault: false
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: 'filesystem'
+      compactor:
+        retention_enabled: true
+      limits_config:
+        retention_period: 60d
+    monitoring:
+      serviceMonitor:
+        enabled: true
+    singleBinary:
+      replicas: 1
       persistence:
         enabled: true
         size: 25Gi
-      config:
-        # Retention period: 63 days because retention period has to be a multiple of periodic table duration which is 168h by default
-        chunk_store_config:
-          # To avoid querying of data beyond the retention period, max_look_back_period config in chunk_store_config must be set to a value less than or equal to what is set in table_manager.retention_period.
-          max_look_back_period: 1512h
-        table_manager:
-          retention_deletes_enabled: true
-          retention_period: 1512h
-      serviceMonitor:
-        enabled: true
