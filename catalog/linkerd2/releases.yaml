@@ -39,37 +39,52 @@ spec:
     - name: linkerd-crds
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+        patches:
+          - target:
+              kind: Deployment
               name: linkerd-destination
               namespace: linkerd
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: linkerd-destination
+                namespace: linkerd
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+          - target:
+              kind: Deployment
               name: linkerd-identity
               namespace: linkerd
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: linkerd-identity
+                namespace: linkerd
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+          - target:
+              kind: Deployment
               name: linkerd-proxy-injector
               namespace: linkerd
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: linkerd-proxy-injector
+                namespace: linkerd
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   valuesFrom:
     - kind: Secret
       name: linkerd-trust-anchor

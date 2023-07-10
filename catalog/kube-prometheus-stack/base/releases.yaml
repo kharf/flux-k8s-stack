@@ -15,37 +15,52 @@ spec:
       interval: 1m
   postRenderers:
     - kustomize:
-        patchesStrategicMerge:
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+        patches:
+          - target:
+              kind: Deployment
               name: kube-prometheus-stack-kube-state-metrics
               namespace: monitoring
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: kube-prometheus-stack-kube-state-metrics
+                namespace: monitoring
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+          - target:
+              kind: Deployment
               name: kube-prometheus-stack-grafana
               namespace: monitoring
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          - kind: Deployment
-            apiVersion: apps/v1
-            metadata:
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: kube-prometheus-stack-grafana
+                namespace: monitoring
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+          - target:
+              kind: Deployment
               name: kube-prometheus-stack-operator
               namespace: monitoring
-            spec:
-              template:
-                metadata:
-                  annotations:
-                    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+            patch: |-
+              kind: Deployment
+              apiVersion: apps/v1
+              metadata:
+                name: kube-prometheus-stack-operator
+                namespace: monitoring
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   install:
     crds: CreateReplace
   upgrade:

@@ -4,5 +4,5 @@ namespace: ingress
 resources:
   - ../base
   - backend-configs.yaml
-patchesStrategicMerge:
-  - releases.yaml
+patches:
+  - path: releases.yaml
