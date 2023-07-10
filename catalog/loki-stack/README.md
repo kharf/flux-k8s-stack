@@ -7,7 +7,7 @@
 #### Kustomizations
 ```yaml
 # note: loki uses the namespace of the kube-prometheus-stack, so this is optional
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: kube-prometheus-stack-namespace
@@ -22,7 +22,7 @@ spec:
   prune: true
   wait: true
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: loki-stack

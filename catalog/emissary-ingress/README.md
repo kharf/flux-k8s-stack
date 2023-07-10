@@ -6,7 +6,7 @@
 
 ### Basic setup
 ```yaml
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: emissary-ingress-namespace
@@ -21,7 +21,7 @@ spec:
   prune: true
   wait: true
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: emissary-ingress
@@ -43,7 +43,7 @@ spec:
 This will deploy emissary-ingress with a NodePort service and a GCP BackendConfig as described [here](https://www.getambassador.io/docs/emissary/latest/topics/running/ambassador-with-gke/#5-configure-backendconfig-for-health-checks).
 
 ```yaml
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: emissary-ingress-namespace
@@ -58,7 +58,7 @@ spec:
   prune: true
   wait: true
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: emissary-ingress
@@ -83,7 +83,7 @@ Ingress, Listener and Hosts manifests are expected to be in ./infrastructure/dev
 
 #### Kustomization
 ```yaml
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: emissary-ingress-config

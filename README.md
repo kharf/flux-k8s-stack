@@ -6,7 +6,7 @@ A catalog of Kubernetes tools for your Flux2 GitOps setup
 Set up a [GitRepository](https://fluxcd.io/docs/components/source/gitrepositories/) source, which you can use for your Kustomizations to apply the manifests found in the catalog:
 
 ```yaml
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: flux-k8s-stack
