@@ -14,7 +14,7 @@ To use this stack you have to apply 2 configurations (and the GitRepository sour
 
 ```yaml
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: istio-stack-namespace
@@ -29,7 +29,7 @@ spec:
   prune: true
   wait: true
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: istio-system
@@ -53,7 +53,7 @@ This will set up the base istio and additionally add some google specific annota
 
 ```yaml
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: istio-stack-namespace
@@ -68,7 +68,7 @@ spec:
   prune: true
   wait: true
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: istio-system
@@ -119,7 +119,7 @@ To use Kiali, you have to apply the following configuration (and the GitReposito
 
 ```yaml
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: kiali
