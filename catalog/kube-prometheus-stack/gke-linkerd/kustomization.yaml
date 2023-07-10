@@ -4,5 +4,5 @@ namespace: monitoring
 resources:
   - ../gke
   - ../linkerd/dashboards
-patchesStrategicMerge:
-  - ../linkerd/releases.yaml
+patches:
+  - path: ../linkerd/releases.yaml
