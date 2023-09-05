@@ -10,7 +10,7 @@ _#workflow: {
 
 _#checkoutCode: {
 	name: "Checkout code"
-	uses: "actions/checkout@v3.6.0"
+	uses: "actions/checkout@v4"
 	with: {
 		token: "${{ secrets.PAT }}"
 	}
