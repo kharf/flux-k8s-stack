@@ -57,8 +57,8 @@ flux create kustomization infrastructure \
 --path=$KS_PATH \
 --prune=true \
 --wait=true \
---timeout=8m \
---health-check-timeout=8m
+--timeout=10m \
+--health-check-timeout=10m
 
 if [ $? -eq 0 ]
 then
