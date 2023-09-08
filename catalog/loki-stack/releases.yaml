@@ -17,6 +17,9 @@ spec:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+  upgrade:
+    remediation:
+      retries: -1
   values:
     loki:
       auth_enabled: false
