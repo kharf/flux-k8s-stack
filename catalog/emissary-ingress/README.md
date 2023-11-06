@@ -24,6 +24,23 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: emissary-ingress-crds
+  namespace: flux-system
+spec:
+  interval: 10m
+  retryInterval: 1m0s
+  dependsOn:
+    - name: emissary-ingress-namespace
+  sourceRef:
+    kind: GitRepository
+    name: flux-k8s-stack
+  path: "./catalog/emissary-ingress/crds"
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: emissary-ingress
   namespace: flux-system
 spec:
@@ -31,6 +48,7 @@ spec:
   retryInterval: 1m0s
   dependsOn:
     - name: emissary-ingress-namespace
+    - name: emissary-ingress-crds
   sourceRef:
     kind: GitRepository
     name: flux-k8s-stack
