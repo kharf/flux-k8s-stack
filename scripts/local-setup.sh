@@ -68,5 +68,6 @@ else
   kubectl get hr -A
   kubectl get all -A
   kubectl get ingress -A
+  kubectl describe hr -A
   exit 1
 fi
