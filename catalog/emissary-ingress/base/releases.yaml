@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: emissary-ingress
-      version: 8.8.2
+      version: 8.9.0
       sourceRef:
         kind: HelmRepository
         name: emissary-ingress
@@ -23,4 +23,6 @@ spec:
       enabled: false
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    waitForApiext:
+      deploymentNamespace: ingress
 ---
