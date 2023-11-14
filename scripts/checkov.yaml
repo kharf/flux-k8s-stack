@@ -17,4 +17,5 @@ skip-check:
   - CKV_K8S_28 # https://docs.bridgecrew.io/docs/bc_k8s_27 - Ensure admission of containers with NET_RAW capability is minimized (needed for emissary I think)
   - CKV_K8S_37 # https://docs.bridgecrew.io/docs/bc_k8s_34 - Ensure admission of containers with capabilities assigned is limited (needed for emissary I think)
   - CKV2_K8S_6 # Minimize the admission of pods which lack an associated NetworkPolicy (should be handled by customers of this catalog)
+  - CKV_K8S_11 # https://docs.bridgecrew.io/docs/bc_k8s_10 - Ensure CPU limits are set (According to best practices you shouldn't set cpu limits)
   - CKV_GHA_7 # https://docs.bridgecrew.io/docs/the-build-output-cannot-be-affected-by-user-parameters-other-than-the-build-entry-point-and-the-top-level-source-location-github-actions-workflow_dispatch-inputs-must-be-empty - Ensure GitHub Actions does not contain workflow_dispatch inputs parameters
