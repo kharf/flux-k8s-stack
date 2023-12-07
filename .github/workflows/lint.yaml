@@ -16,7 +16,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
       - name: Setup python
-        uses: actions/setup-python@v4.8.0
+        uses: actions/setup-python@v5
       - name: Lint
         run: ./scripts/checkov.sh
 permissions: read-all
