@@ -154,7 +154,7 @@ genWorkflow: _#workflow & {
 				_#checkoutCode,
 				{
 					name: "Setup CUE"
-					uses: "cue-lang/setup-cue@v1.0.0"
+					uses: "cue-lang/setup-cue@v1.0.1"
 					with: {
 						version: "v0.5.0"
 					}
