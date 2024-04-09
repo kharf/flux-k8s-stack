@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 5.47.2
+      version: 6.0.0
       sourceRef:
         kind: HelmRepository
         name: loki
@@ -22,6 +22,7 @@ spec:
     remediation:
       retries: -1
   values:
+    deploymentMode: SingleBinary
     loki:
       auth_enabled: false
       commonConfig:
@@ -32,9 +33,6 @@ spec:
         retention_enabled: true
       limits_config:
         retention_period: 60d
-    monitoring:
-      serviceMonitor:
-        enabled: true
     singleBinary:
       replicas: 1
       persistence:
