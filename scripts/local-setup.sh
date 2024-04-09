@@ -69,5 +69,6 @@ else
   kubectl get all -A
   kubectl get ingress -A
   kubectl describe hr -A
+  kubectl logs statefulset/loki -n monitoring
   exit 1
 fi
