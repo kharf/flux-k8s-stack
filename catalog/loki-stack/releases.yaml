@@ -38,3 +38,9 @@ spec:
       persistence:
         enabled: true
         size: 25Gi
+    read:
+      replicas: 0
+    write:
+      replicas: 0
+    backend:
+      replicas: 0
