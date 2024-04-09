@@ -46,3 +46,20 @@ spec:
   path: "./catalog/loki-stack"
   prune: true
   wait: true
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/values/loki/schemaConfig
+          value:
+            configs:
+            - from: 2024-04-01
+              store: tsdb
+              object_store: filesystem
+              schema: v13
+              index:
+                prefix: loki_index_
+                period: 24h
+      target:
+        kind: HelmRelease
+        name: loki
+        namespace: monitoring
