@@ -22,16 +22,13 @@ spec:
     remediation:
       retries: -1
   values:
+    deploymentMode: SingleBinary
     loki:
       auth_enabled: false
       commonConfig:
         replication_factor: 1
       storage:
         type: 'filesystem'
-      storage_config:
-        tsdb_shipper:
-          active_index_directory: /data/tsdb-index
-          cache_location: /data/tsdb-cache
       compactor:
         retention_enabled: true
         delete_request_store: filesystem
