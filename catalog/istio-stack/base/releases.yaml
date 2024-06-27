@@ -37,7 +37,7 @@ spec:
   interval: 10m0s
   chart:
     spec:
-      version: "1.22.1"
+      version: "1.22.2"
       chart: istiod
       sourceRef:
         kind: HelmRepository
