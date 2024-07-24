@@ -82,7 +82,7 @@ releaseWorkflow: _#workflow & {
 					name: "Release"
 					env: MR_GITHUB_TOKEN: "${{ secrets.PAT }}"
 					run: """
-						curl -L https://github.com/kharf/monoreleaser/releases/download/v0.0.15/monoreleaser-linux-amd64 --output monoreleaser
+						curl -L https://github.com/kharf/monoreleaser/releases/download/v0.0.16/monoreleaser-linux-amd64 --output monoreleaser
 						chmod +x monoreleaser
 						./monoreleaser release . ${{ inputs.version }}
 						"""
