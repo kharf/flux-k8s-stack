@@ -5362,7 +5362,7 @@ spec:
         runAsUser: 8888
       containers:
         - name: emissary-apiext
-          image: docker.io/emissaryingress/emissary:3.9.0
+          image: docker.io/emissaryingress/emissary:3.9.1
           imagePullPolicy: IfNotPresent
           command: [ "apiext", "emissary-apiext" ]
           ports:
