@@ -15,7 +15,7 @@ spec:
   interval: 5m0s
   url: https://github.com/kharf/flux-k8s-stack
   ref:
-    tag: v32.6.1
+    tag: v32.7.0
 ```
 
 Recommendation: Use [Renovatebot](https://docs.renovatebot.com/modules/manager/flux/#gitrepository-support) to configure automatic updates for this catalog.
