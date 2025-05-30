@@ -1,4 +1,3 @@
----
 apiVersion: v1
 data:
   linkerd-service-dashboard.json: |
@@ -1316,5 +1315,6 @@ data:
 kind: ConfigMap
 metadata:
   name: grafana-linkerd-service-dashboard
+  namespace: monitoring
   labels:
     grafana_dashboard: "1"
